@@ -987,7 +987,7 @@ function showPage(name){
   document.querySelectorAll('.nav-inner a').forEach(a=>a.classList.remove('active-nav'));
   const el=document.getElementById('nav-'+name);
   if(el)el.classList.add('active-nav');
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo(0,0);
 }
 function scrollTo(id){setTimeout(()=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},120)}
 function toggleNav(){const n=document.getElementById('mobileNav');n.style.display=n.style.display==='block'?'none':'block'}
