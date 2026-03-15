@@ -43,7 +43,7 @@ nav{background:var(--topbar-bg)}
 .dropdown-menu a:hover{background:#7c3aed;color:#fff}
 .dropdown:hover .dropdown-menu{display:block}
 .hamburger{display:none;background:#7c3aed;border:none;color:#fff;padding:10px 14px;font-size:20px;cursor:pointer;border-radius:4px}
-.mobile-nav{display:none;background:#1a1a2e;padding:10px 0}
+.mobile-nav{display:none;background:var(--topbar-bg);padding:10px 0}
 .mobile-nav a{display:block;color:#d1d5db;text-decoration:none;padding:12px 20px;border-bottom:1px solid #2d2d44;font-weight:600}
 .mobile-nav a:hover{background:#7c3aed;color:#fff}
 /* PAGE HERO */
@@ -51,12 +51,12 @@ nav{background:var(--topbar-bg)}
 .page-hero h2{font-size:clamp(26px,4vw,44px);font-weight:900;margin-bottom:12px}
 .page-hero h2 span{color:#a78bfa}
 .page-hero p{color:#c4b5fd;font-size:16px;max-width:600px;margin:0 auto}
-.breadcrumb{background:#f8f7ff;padding:12px 20px;font-size:13px;color:#6b7280;max-width:100%;border-bottom:1px solid #e5e7eb}
+.breadcrumb{background:var(--bg-section);padding:12px 20px;font-size:13px;color:var(--text-muted);max-width:100%;border-bottom:1px solid var(--border-color)}
 .breadcrumb-inner{max-width:1100px;margin:0 auto}
-.breadcrumb a{color:#7c3aed;font-weight:700;text-decoration:none}
+.breadcrumb a{color:var(--primary);font-weight:700;text-decoration:none}
 .breadcrumb a:hover{text-decoration:underline}
 /* RESOURCES */
-.resources-page{background:#f8f7ff;padding:60px 20px}
+.resources-page{background:var(--bg-section);padding:60px 20px}
 .resources-page-inner{max-width:1100px;margin:0 auto}
 .resources-section{margin-bottom:60px}
 .resources-section h3{font-size:24px;font-weight:900;color:var(--text-main);margin-bottom:8px;display:flex;align-items:center;gap:10px}
@@ -182,7 +182,7 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
     </div>
     <a href="index.html#meetings">الاجتماعات</a>
     <a href="index.html#sober">البقاء رصين</a>
-    <a href="resources.html" class="active-nav">الموارد</a>
+    <a href="resources.html">الموارد</a>
     <a href="index.html#contact">اتصل بنا</a>
   </div>
 </nav>
@@ -241,7 +241,7 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
         <div class="res-card">
           <div class="res-card-icon" style="background:#fff7ed"><i class="fas fa-address-book" style="color:#ea580c"></i></div>
           <h4>من منظور بيل</h4>
-         
+          <p>رؤى شخصية وتجارب من أحد مؤسسي البرنامج.</p>
           <a href="books/من منظور بيل.pdf" target="_blank" class="res-card-btn"><i class="fas fa-download"></i> تحميل الكتاب</a>
         </div>
       </div>
@@ -377,18 +377,47 @@ function filterResources(){
     card.style.display=card.innerText.toLowerCase().includes(q)?'':'none';
   });
 }
-// Dark mode
+// Dark mode - محسّن
 const toggle=document.getElementById('themeToggle');
 const icon=toggle.querySelector('i');
-if(localStorage.getItem('theme')==='dark'){
-  document.documentElement.setAttribute('data-theme','dark');
-  icon.className='fas fa-sun';
+
+// تحقق من الإعدادات المحفوظة أو تفضيلات النظام
+function initTheme(){
+  const saved=localStorage.getItem('theme');
+  const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark=saved?saved==='dark':prefersDark;
+  
+  if(isDark){
+    document.documentElement.setAttribute('data-theme','dark');
+    icon.className='fas fa-sun';
+  }else{
+    document.documentElement.removeAttribute('data-theme');
+    icon.className='fas fa-moon';
+  }
 }
+
+// تهيئة الثيم عند تحميل الصفحة
+initTheme();
+
+// تبديل الثيم عند الضغط على الزر
 toggle.addEventListener('click',()=>{
   const isDark=document.documentElement.getAttribute('data-theme')==='dark';
-  document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
-  icon.className=isDark?'fas fa-moon':'fas fa-sun';
-  localStorage.setItem('theme',isDark?'light':'dark');
+  if(isDark){
+    document.documentElement.removeAttribute('data-theme');
+    icon.className='fas fa-moon';
+    localStorage.setItem('theme','light');
+  }else{
+    document.documentElement.setAttribute('data-theme','dark');
+    icon.className='fas fa-sun';
+    localStorage.setItem('theme','dark');
+  }
+});
+
+// تحديث الثيم عند تغيير تفضيلات النظام
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{
+  if(!localStorage.getItem('theme')){
+    initTheme();
+  }
 });
 </script>
 </body>
