@@ -28,7 +28,17 @@ function showPage(name){
   window.scrollTo({top:0,left:0,behavior:'instant'});
 }
 function scrollToId(id){setTimeout(function(){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},120);}
-function toggleNav(){var n=document.getElementById('mobileNav');if(n)n.style.display=n.style.display==='block'?'none':'block';}
+function toggleNav(){
+  var n=document.getElementById('mobileNav');
+  if(!n)return;
+  if(n.style.display==='block'){
+    n.style.display='none';
+    document.body.style.overflow='';
+  }else{
+    n.style.display='block';
+    document.body.style.overflow='hidden';
+  }
+}
 function openTab(e,id){
   document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});
   document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
@@ -232,10 +242,12 @@ nav{background:var(--topbar-bg)}
 .dropdown:hover .dropdown-menu{display:block}
 
 /* MOBILE NAV */
-.hamburger{display:none;background:#7c3aed;border:none;color:#fff;padding:10px 14px;font-size:20px;cursor:pointer;border-radius:4px}
-.mobile-nav{display:none;background:#1a1a2e;padding:10px 0}
-.mobile-nav a{display:block;color:#d1d5db;text-decoration:none;padding:12px 20px;border-bottom:1px solid #2d2d44;font-weight:600;cursor:pointer}
-.mobile-nav a:hover{background:#7c3aed;color:#fff}
+.hamburger{display:none;background:#7c3aed;border:none;color:#fff;padding:10px 14px;font-size:20px;cursor:pointer;border-radius:4px;touch-action:manipulation}
+.mobile-nav{display:none;position:fixed;top:0;right:0;left:0;bottom:0;background:rgba(0,0,0,.5);z-index:9998}
+.mobile-nav-inner{position:absolute;top:0;right:0;width:80%;max-width:300px;height:100%;background:#1a1a2e;padding:20px 0;overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,.4)}
+.mobile-nav-close{display:block;color:#fff;padding:14px 20px;font-size:18px;border-bottom:1px solid #2d2d44;cursor:pointer;text-align:left}
+.mobile-nav a{display:block;color:#d1d5db;text-decoration:none;padding:14px 20px;border-bottom:1px solid #2d2d44;font-weight:600;cursor:pointer;font-size:15px;touch-action:manipulation;min-height:48px;line-height:20px}
+.mobile-nav a:hover,.mobile-nav a:active{background:#7c3aed;color:#fff}
 
 /* HERO */
 .hero{background:linear-gradient(135deg,#1a1a2e 0%,#2d1b69 50%,#4c1d95 100%);color:#fff;padding:80px 20px;text-align:center;position:relative;overflow:hidden}
@@ -517,7 +529,9 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
   /* Layout */
   .footer-grid{grid-template-columns:1fr}
   .hero{padding:40px 16px}
-  .topbar-inner{justify-content:center;text-align:center;flex-direction:column;gap:6px}
+  .topbar-inner{justify-content:space-between;flex-wrap:nowrap}
+  .topbar-numbers{font-size:11px}
+  .topbar-test-btn{font-size:11px;padding:5px 10px}
   .about,.features,.sober,.meetings,.contact{padding:40px 16px}
   #steps,#faq{padding:40px 16px}
   .counter-section{padding:40px 16px}
@@ -675,14 +689,17 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
 </nav>
 
 <!-- MOBILE NAV -->
-<div class="mobile-nav" id="mobileNav">
-  <a onclick="showPage('home');toggleNav()">الرئيسية</a>
-  <a onclick="showPage('home');scrollToId('about');toggleNav()">من نحن</a>
-  <a onclick="showPage('home');scrollToId('meetings');toggleNav()">الاجتماعات</a>
-  <a onclick="showPage('home');scrollToId('sober');toggleNav()">البقاء رصين</a>
-  <a onclick="showPage('resources');toggleNav()">الموارد</a>
-  <a onclick="showPage('home');scrollToId('contact');toggleNav()">اتصل بنا</a>
-  <a onclick="openModal('testModal');toggleNav()" style="color:#a78bfa;font-weight:800"><i class="fas fa-clipboard-check"></i> اختبر نفسك</a>
+<div class="mobile-nav" id="mobileNav" onclick="if(event.target===this)toggleNav()">
+  <div class="mobile-nav-inner">
+    <span class="mobile-nav-close" onclick="toggleNav()"><i class="fas fa-times"></i> إغلاق</span>
+    <a href="javascript:void(0)" onclick="showPage('home');toggleNav()">🏠 الرئيسية</a>
+    <a href="javascript:void(0)" onclick="showPage('home');scrollToId('about');toggleNav()">👥 من نحن</a>
+    <a href="javascript:void(0)" onclick="showPage('home');scrollToId('meetings');toggleNav()">📅 الاجتماعات</a>
+    <a href="javascript:void(0)" onclick="showPage('home');scrollToId('sober');toggleNav()">💪 البقاء رصين</a>
+    <a href="javascript:void(0)" onclick="showPage('resources');toggleNav()">📚 الموارد</a>
+    <a href="javascript:void(0)" onclick="showPage('home');scrollToId('contact');toggleNav()">📞 اتصل بنا</a>
+    <a href="javascript:void(0)" onclick="openModal('testModal');toggleNav()" style="color:#a78bfa;font-weight:800"><i class="fas fa-clipboard-check"></i> اختبر نفسك</a>
+  </div>
 </div>
 
 <!-- HOME PAGE -->
