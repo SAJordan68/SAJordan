@@ -14,6 +14,132 @@
 <meta property="og:description" content="برنامج التعافي من إدمان الجنس عبر خطوات التعافي الاثنتي عشرة ودعم المجموعات.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sajordan68.github.io/SAJordan/">
+<script>
+// كل الدوال هنا في الـ head عشان تشتغل فوراً على الموبايل
+function openModal(id){var el=document.getElementById(id);if(el)el.classList.add('open');}
+function closeModal(id){var el=document.getElementById(id);if(el)el.classList.remove('open');}
+function showPage(name){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  var pg=document.getElementById('page-'+name);if(pg)pg.classList.add('active');
+  document.querySelectorAll('.nav-inner a').forEach(function(a){a.classList.remove('active-nav');});
+  var el=document.getElementById('nav-'+name);if(el)el.classList.add('active-nav');
+  document.body.scrollTop=0;
+  document.documentElement.scrollTop=0;
+  window.scrollTo({top:0,left:0,behavior:'instant'});
+}
+function scrollToId(id){setTimeout(function(){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},120);}
+function toggleNav(){var n=document.getElementById('mobileNav');if(n)n.style.display=n.style.display==='block'?'none':'block';}
+function openTab(e,id){
+  document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  var el=document.getElementById(id);if(el)el.classList.add('active');
+  if(e&&e.currentTarget)e.currentTarget.classList.add('active');
+}
+function switchTab(id){
+  document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  var el=document.getElementById(id);if(el)el.classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(function(b){
+    if((id==='who-we-are'&&b.textContent.trim()==='من نحن')||(id==='the-problem'&&b.textContent.trim()==='المشكلة')||(id==='the-solution'&&b.textContent.trim()==='الحل'))b.classList.add('active');
+  });
+}
+function toggleFaq(n){
+  var c=document.getElementById('fqc'+n),i=document.getElementById('fqi'+n);
+  if(!c||!i)return;
+  if(c.style.display==='block'){c.style.display='none';i.className='fas fa-plus';}
+  else{c.style.display='block';i.className='fas fa-minus';}
+}
+function toggleQ(n,e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  var cb=document.getElementById('q'+n);if(!cb)return;
+  cb.checked=!cb.checked;
+  cb.closest('.test-question').classList.toggle('checked',cb.checked);
+  updateProgress();
+}
+function updateProgress(){
+  var checked=0;
+  for(var i=1;i<=20;i++){var q=document.getElementById('q'+i);if(q&&q.checked)checked++;}
+  var pf=document.getElementById('progressFill');if(pf)pf.style.width=(checked/20*100)+'%';
+}
+function showTestResult(){
+  var score=0;
+  for(var i=1;i<=20;i++){var q=document.getElementById('q'+i);if(q&&q.checked)score++;}
+  var res=document.getElementById('testResult');if(!res)return;
+  res.style.display='block';
+  document.getElementById('testScore').textContent=score+'/20';
+  document.getElementById('testScoreLabel').textContent='إجاباتك بنعم';
+  var box=document.getElementById('testResultBox');
+  var title=document.getElementById('testResultTitle');
+  var text=document.getElementById('testResultText');
+  var action=document.getElementById('testResultAction');
+  box.className='test-result';
+  if(score===0){box.classList.add('none');title.textContent='✅ لا توجد علامات واضحة';text.textContent='لم تظهر إجاباتك علامات واضحة للإدمان الجنسي.';action.innerHTML='';}
+  else if(score<=5){box.classList.add('low');title.textContent='⚠️ بعض العلامات موجودة';text.textContent='أجاباتك تشير لبعض علامات الإدمان الجنسي.';action.innerHTML='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px"><a href="tel:+962797399453" style="display:inline-flex;align-items:center;gap:6px;background:#25d366;color:#fff;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none"><i class="fas fa-phone"></i> 🧔 رجال: +962 7 9739 9453</a><a href="tel:+962795345189" style="display:inline-flex;align-items:center;gap:6px;background:#8B5CF6;color:#fff;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none"><i class="fas fa-phone"></i> 👩 نساء: +962 7 9534 5189</a></div>';}
+  else if(score<=12){box.classList.add('mid');title.textContent='🔴 علامات الإدمان موجودة';text.textContent='أجاباتك تشير بوضوح لعلامات إدمان جنسي. التعافي ممكن.';action.innerHTML='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px"><a href="tel:+962797399453" style="display:inline-flex;align-items:center;gap:6px;background:#25d366;color:#fff;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none"><i class="fas fa-phone"></i> 🧔 رجال: +962 7 9739 9453</a><a href="tel:+962795345189" style="display:inline-flex;align-items:center;gap:6px;background:#8B5CF6;color:#fff;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none"><i class="fas fa-phone"></i> 👩 نساء: +962 7 9534 5189</a></div>';}
+  else{box.classList.add('high');title.textContent='🆘 علامات قوية جداً للإدمان الجنسي';text.textContent='أجاباتك تشير لإدمان جنسي شديد. لكن التعافي ممكن. تواصل معنا اليوم.';action.innerHTML='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><a href="tel:+962797399453" style="display:inline-flex;align-items:center;gap:6px;background:#25d366;color:#fff;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none"><i class="fas fa-phone"></i> 🧔 رجال: +962 7 9739 9453</a><a href="tel:+962795345189" style="display:inline-flex;align-items:center;gap:6px;background:#8B5CF6;color:#fff;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none"><i class="fas fa-phone"></i> 👩 نساء: +962 7 9534 5189</a></div>';}
+  res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function toggleStepsTraditions(){
+  var tog=document.getElementById('stepsTraditionsToggle');if(!tog)return;
+  var stepsEl=document.getElementById('stepsContent');
+  var tradEl=document.getElementById('traditionsContent');
+  var ls=document.getElementById('label-steps');
+  var lt=document.getElementById('label-traditions');
+  if(tog.checked){if(stepsEl)stepsEl.style.display='none';if(tradEl)tradEl.style.display='block';if(ls)ls.classList.remove('active-label');if(lt)lt.classList.add('active-label');}
+  else{if(stepsEl)stepsEl.style.display='block';if(tradEl)tradEl.style.display='none';if(ls)ls.classList.add('active-label');if(lt)lt.classList.remove('active-label');}
+}
+function calculateSobriety(){
+  var input=document.getElementById('soberDate').value;
+  if(!input){['count-years','count-months','count-days','count-hours'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent='0';});return;}
+  var startDate=new Date(input);var today=new Date();
+  var years=today.getFullYear()-startDate.getFullYear();
+  var months=today.getMonth()-startDate.getMonth();
+  var days=today.getDate()-startDate.getDate();
+  if(days<0){months--;days+=new Date(today.getFullYear(),today.getMonth(),0).getDate();}
+  if(months<0){years--;months+=12;}
+  var totalDays=Math.floor((today-startDate)/(1000*60*60*24));
+  document.getElementById('count-years').textContent=years;
+  document.getElementById('count-months').textContent=months;
+  document.getElementById('count-days').textContent=days;
+  document.getElementById('count-hours').textContent=(totalDays*24).toLocaleString('ar-EG');
+  localStorage.setItem('soberDate',input);
+}
+function filterResources(){
+  var query=document.getElementById('resourceSearch').value.toLowerCase();
+  document.querySelectorAll('.res-card,.online-card,.sa-link-card').forEach(function(card){card.style.display=card.textContent.toLowerCase().includes(query)?'':'none';});
+}
+function shareWA(){window.open('https://wa.me/?text='+encodeURIComponent('SA الأردن '+window.location.href));}
+function shareTG(){window.open('https://t.me/share/url?url='+encodeURIComponent(window.location.href));}
+function copyLink(){navigator.clipboard.writeText(window.location.href);alert('تم نسخ الرابط!');}
+function handleForm(e){e.preventDefault();alert('شكراً! سنتواصل معك قريباً.');e.target.reset();}
+function initTheme(){
+  var saved=localStorage.getItem('theme')||'light';
+  document.documentElement.setAttribute('data-theme',saved);
+  updateThemeIcon(saved);
+}
+function toggleTheme(){
+  var current=document.documentElement.getAttribute('data-theme')||'light';
+  var next=current==='light'?'dark':'light';
+  document.documentElement.setAttribute('data-theme',next);
+  localStorage.setItem('theme',next);
+  updateThemeIcon(next);
+}
+function updateThemeIcon(theme){
+  var btn=document.getElementById('themeToggle');
+  if(btn)btn.innerHTML='<i class="fas fa-'+(theme==='dark'?'sun':'moon')+'"></i>';
+}
+// تشغيل فوري للثيم
+(function(){var s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
+
+document.addEventListener('DOMContentLoaded',function(){
+  initTheme();
+  var tt=document.getElementById('themeToggle');
+  if(tt)tt.addEventListener('click',function(){toggleTheme();});
+  window.addEventListener('click',function(e){if(e.target.classList.contains('modal'))e.target.classList.remove('open');});
+  var saved=localStorage.getItem('soberDate');
+  if(saved){var sd=document.getElementById('soberDate');if(sd){sd.value=saved;calculateSobriety();}}
+});
+</script>
 </head>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -128,8 +254,8 @@ nav{background:var(--topbar-bg)}
 .section-title h3 span{color:#7c3aed}
 .section-title p{color:var(--text-muted);font-size:16px;max-width:600px;margin:0 auto;line-height:1.8}
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px}
-.card{background:var(--card-bg);border-radius:12px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.07);transition:.3s;text-decoration:none;color:inherit;display:flex;flex-direction:column;cursor:pointer}
-.card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(124,58,237,.15)}
+.card{background:var(--card-bg);border-radius:12px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.07);transition:.3s;text-decoration:none;color:inherit;display:flex;flex-direction:column;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(124,58,237,.15)}
+.card:hover,.card:active{transform:translateY(-6px);box-shadow:0 12px 30px rgba(124,58,237,.15)}
 .card-img{height:180px;background:#e9d5ff;display:flex;align-items:center;justify-content:center;font-size:60px;color:#7c3aed}
 .card-body{padding:24px;flex:1;display:flex;flex-direction:column}
 .card-body h4{font-size:18px;font-weight:800;color:var(--text-dark);margin-bottom:10px}
@@ -210,7 +336,7 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
 .footer-col p{font-size:13px;line-height:1.8;margin-bottom:10px}
 .footer-col ul{list-style:none}
 .footer-col ul li{margin-bottom:8px}
-.footer-col ul li a{color:#9ca3af;text-decoration:none;font-size:13px;transition:.2s;cursor:pointer}
+.footer-col ul li a{color:#9ca3af;text-decoration:none;font-size:13px;transition:.2s;cursor:pointer;display:inline-block;padding:4px 0;min-height:32px;line-height:24px}
 .footer-col ul li a:hover{color:#a78bfa}
 .footer-bottom{border-top:1px solid #1f1f35;padding-top:20px;text-align:center;font-size:13px}
 .social-links{display:flex;gap:10px;margin-top:16px}
@@ -231,11 +357,11 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
 .test-intro{background:#ede9fe;border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:14px;color:#4c1d95;line-height:1.7}
 .test-progress-bar{height:6px;background:#e5e7eb;border-radius:3px;margin-bottom:24px;overflow:hidden}
 .test-progress-fill{height:100%;background:linear-gradient(90deg,#7c3aed,#a78bfa);border-radius:3px;transition:.3s}
-.test-question{background:var(--bg-section);border-radius:10px;padding:18px 20px;margin-bottom:10px;display:flex;align-items:flex-start;gap:14px;transition:.2s;cursor:pointer}
-.test-question:hover{background:#ede9fe}
+.test-question{background:var(--bg-section);border-radius:10px;padding:18px 20px;margin-bottom:10px;display:flex;align-items:flex-start;gap:14px;transition:.2s;cursor:pointer;-webkit-tap-highlight-color:rgba(124,58,237,.2)}
+.test-question:hover,.test-question:active{background:#ede9fe}
 .test-question.checked{background:#ede9fe;border-right:3px solid #7c3aed}
-.test-question input[type=checkbox]{margin-top:3px;accent-color:#7c3aed;width:18px;height:18px;flex-shrink:0;cursor:pointer}
-.test-question label{font-size:14px;color:var(--text-gray);line-height:1.6;cursor:pointer;flex:1}
+.test-question input[type=checkbox]{margin-top:3px;accent-color:#7c3aed;width:24px;height:24px;flex-shrink:0;cursor:pointer;touch-action:manipulation}
+.test-question label{font-size:14px;color:var(--text-gray);line-height:1.6;cursor:pointer;flex:1;-webkit-user-select:none;user-select:none}
 .test-question .q-num{font-size:12px;font-weight:800;color:#7c3aed;flex-shrink:0;margin-top:3px}
 .test-result{border-radius:12px;padding:24px;margin-top:24px}
 .test-result.none{background:#f0fdf4;border:2px solid #86efac}
@@ -362,6 +488,10 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
 .trad-modal-num{background:#7c3aed;color:#fff;min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
 .trad-modal-text{font-size:13px;color:var(--text-gray);line-height:1.7}
 
+
+/* ===== RESPONSIVE SYSTEM ===== */
+
+/* Tablet: 768px - 900px */
 @media(max-width:900px){
   .tab-about-inner,.contact-inner{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
@@ -369,15 +499,110 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
   .hamburger{display:block}
   .meetings-table{font-size:13px}
   .meetings-table th,.meetings-table td{padding:10px 12px}
+  .about-stats{grid-template-columns:1fr 1fr}
+  .cards-grid{grid-template-columns:repeat(2,1fr)}
+  .sober-grid{grid-template-columns:repeat(2,1fr)}
+  .section-title h3{font-size:26px}
+  .hero h2{font-size:clamp(24px,4vw,40px)}
+  .counter-display{grid-template-columns:repeat(3,1fr)}
 }
+
+/* Mobile: max 600px */
 @media(max-width:600px){
+  /* Layout */
   .footer-grid{grid-template-columns:1fr}
-  .hero{padding:50px 20px}
-  .topbar-inner{justify-content:center;text-align:center;flex-direction:column}
+  .hero{padding:40px 16px}
+  .topbar-inner{justify-content:center;text-align:center;flex-direction:column;gap:6px}
+  .about,.features,.sober,.meetings,.contact{padding:40px 16px}
+  #steps,#faq{padding:40px 16px}
+  .counter-section{padding:40px 16px}
+  .resources-page{padding:40px 16px}
+
+  /* Typography */
+  .hero h2{font-size:clamp(22px,6vw,32px)}
+  .hero p{font-size:15px}
+  .section-title h3{font-size:22px}
+  .about-text h3{font-size:24px}
+  .contact h3{font-size:22px}
+
+  /* Cards - single column */
+  .cards-grid{grid-template-columns:1fr}
+  .sober-grid{grid-template-columns:1fr}
+  .res-cards{grid-template-columns:1fr}
+  .online-resources{grid-template-columns:1fr}
+  .sa-links{grid-template-columns:1fr 1fr}
   .counter-display{grid-template-columns:1fr 1fr}
+
+  /* Tabs */
+  .action-tabs{flex-direction:row;flex-wrap:wrap;gap:6px}
+  .tab-btn{border-radius:8px;margin:0;font-size:13px;padding:10px 14px;flex:1;min-width:80px;text-align:center}
+  .tab-content{border-radius:12px;padding:20px}
+  .tab-about-inner{gap:24px}
+  .about-visual{padding:24px}
+  .about-visual .big-num{font-size:52px}
+
+  /* Buttons */
+  .btn{padding:11px 18px;font-size:14px}
+  .hero-btns{flex-direction:column;align-items:stretch;gap:10px}
+  .hero-btns .btn{justify-content:center}
+
+  /* Header */
+  .logo-text h1{font-size:18px}
+  .logo-icon{width:46px;height:46px;font-size:18px}
+  .topbar{font-size:12px}
+  .topbar-test-btn{font-size:12px;padding:6px 12px}
+
+  /* Counter */
+  .counter-container{padding:24px 16px}
+  .counter-box .val{font-size:24px}
+  .counter-hours-row .val{font-size:22px}
+
+  /* Steps & Traditions */
+  .step-item,.tradition-item{padding:14px}
+  .step-text,.tradition-text{font-size:13px}
+
+  /* FAQ */
+  .faq-btn{font-size:14px;padding:14px 16px}
+
+  /* Meetings */
+  .meetings-table{font-size:12px}
+  .meetings-table th,.meetings-table td{padding:8px 8px}
+
+  /* Footer */
+  .footer-grid{gap:24px}
+  .social-links{flex-wrap:wrap}
+
+  /* Modal */
+  .modal-box{padding:20px 16px;border-radius:10px}
+  .modal-box h3{font-size:18px}
+
+  /* WA Float - smaller on mobile */
+  .wa-float{width:50px;height:50px;font-size:20px}
+  .wa-men{right:70px;bottom:16px}
+  .wa-women{right:14px;bottom:16px}
+
+  /* Hotline */
+  .hotline-box{padding:24px 16px}
+  .hotline-btns{flex-direction:column}
+  .hotline-btn{justify-content:center;font-size:14px}
+}
+
+/* Small mobile: max 380px */
+@media(max-width:380px){
+  .hero h2{font-size:20px}
   .action-tabs{flex-direction:column}
-  .tab-btn{border-radius:8px;margin:2px 0}
-  .tab-content{border-radius:12px}
+  .tab-btn{flex:auto;width:100%}
+  .sa-links{grid-template-columns:1fr}
+  .counter-display{grid-template-columns:1fr 1fr 1fr}
+  .about-stats{grid-template-columns:1fr 1fr}
+}
+
+/* Large screens: min 1400px */
+@media(min-width:1400px){
+  .hero-inner{max-width:900px}
+  .hero h2{font-size:58px}
+  .section-title h3{font-size:36px}
+  .cards-grid{grid-template-columns:repeat(4,1fr)}
 }
 </style>
 
@@ -399,7 +624,7 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
       <a href="tel:+962795345189">👩 نساء: +962 7 9534 5189</a>
     </span>
     <div style="display:flex;align-items:center;gap:15px">
-      <button class="theme-toggle" id="themeToggle" title="تبديل الوضع الليلي"><i class="fas fa-moon"></i></button>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="تبديل الوضع الليلي"><i class="fas fa-moon"></i></button>
       <button class="topbar-test-btn" onclick="openModal('testModal')"><i class="fas fa-clipboard-check"></i> اختبر نفسك</button>
     </div>
   </div>
@@ -432,21 +657,27 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
         <a href="#faq">الأسئلة الشائعة</a>
       </div>
     </div>
-    <a href ="#meetings">البحث عن اجتماع</a>
-    <a href ="#sober">البقاء رصين</a>
+    <div class="dropdown">
+      <span class="nav-item">الاجتماعات والفعاليات <i class="fas fa-chevron-down" style="font-size:11px"></i></span>
+      <div class="dropdown-menu">
+        <a onclick="showPage('home');scrollToId('meetings')">البحث عن اجتماع</a>
+        <a onclick="openModal('eventsModal')">الفعاليات والمؤتمرات</a>
+      </div>
+    </div>
+    <a onclick="showPage('home');scrollToId('sober')">البقاء رصين</a>
     <a href="resources.html" id="nav-resources">الموارد</a>
-    <a onclick="showPage('home');scrollTo('contact')">اتصل بنا</a>
+    <a onclick="showPage('home');scrollToId('contact')">اتصل بنا</a>
   </div>
 </nav>
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
   <a onclick="showPage('home');toggleNav()">الرئيسية</a>
-  <a onclick="showPage('home');scrollTo('about');toggleNav()">من نحن</a>
-  <a onclick="showPage('home');scrollTo('meetings');toggleNav()">الاجتماعات</a>
-  <a onclick="showPage('home');scrollTo('sober');toggleNav()">البقاء رصين</a>
+  <a onclick="showPage('home');scrollToId('about');toggleNav()">من نحن</a>
+  <a onclick="showPage('home');scrollToId('meetings');toggleNav()">الاجتماعات</a>
+  <a onclick="showPage('home');scrollToId('sober');toggleNav()">البقاء رصين</a>
   <a onclick="showPage('resources');toggleNav()">الموارد</a>
-  <a onclick="showPage('home');scrollTo('contact');toggleNav()">اتصل بنا</a>
+  <a onclick="showPage('home');scrollToId('contact');toggleNav()">اتصل بنا</a>
   <a onclick="openModal('testModal');toggleNav()" style="color:#a78bfa;font-weight:800"><i class="fas fa-clipboard-check"></i> اختبر نفسك</a>
 </div>
 
@@ -458,7 +689,8 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
     <h2>ابدأ تعافيك <span>اليوم</span></h2>
     <p>زمالة مدمني الجنس المجهولون هي زمالة تقدم <strong style="color:#a78bfa">حلاً</strong><br>لمشاكل الشهوة والإباحية وإدمان الجنس</p>
     <div class="hero-btns">
-      <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> تواصل معنا</a>
+      <a href="tel:+962797399453" class="btn btn-primary"><i class="fas fa-phone"></i> 🧔 رجال: +962 7 9739 9453</a>
+      <a href="tel:+962795345189" class="btn btn-outline"><i class="fas fa-phone"></i> 👩 نساء: +962 7 9534 5189</a>
       <a href="#meetings" class="btn btn-outline"><i class="fas fa-map-marker-alt"></i> ابحث عن اجتماع</a>
     </div>
   </div>
@@ -544,10 +776,10 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
       <p>نقدم موارد ودعماً شاملاً لمساعدتك في رحلة التعافي</p>
     </div>
     <div class="cards-grid">
-      <div class="card" onclick="openModal('testModal')">
+      <a href="#testModal" onclick="openModal('testModal');return false;" class="card" style="text-decoration:none">
         <div class="card-img" style="background:#fdf4ff"><i class="fas fa-clipboard-check"></i></div>
         <div class="card-body"><h4>اختبار الإدمان الجنسي</h4><p>هذا الاختبار مساعدة لتحديد ما إذا كنت بحاجة لزمالة مدمني الجنس المجهولون.</p><span class="card-link">أجرِ الاختبار <i class="fas fa-arrow-left"></i></span></div>
-      </div>
+      </a>
       <a href="#meetings" class="card" style="text-decoration:none">
         <div class="card-img" style="background:#fff7ed"><i class="fas fa-map-pin" style="color:#ea580c"></i></div>
         <div class="card-body"><h4>ابحث عن اجتماع</h4><p>تُعقد اجتماعات SA وجهاً لوجه وعبر الإنترنت والهاتف في جميع أنحاء الأردن.</p><span class="card-link" style="color:#ea580c">ابحث عن اجتماع <i class="fas fa-arrow-left"></i></span></div>
@@ -556,10 +788,10 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
         <div class="card-img" style="background:#fef9ee"><i class="fas fa-question-circle" style="color:#d97706"></i></div>
         <div class="card-body"><h4>من نحن</h4><p>ما هي زمالة مدمني الجنس المجهولون وما هو الصحو الجنسي؟</p><span class="card-link" style="color:#d97706">اقرأ المزيد <i class="fas fa-arrow-left"></i></span></div>
       </a>
-      <div class="card">
+      <a href="#page-resources" onclick="showPage('resources');return false;" class="card" style="text-decoration:none">
         <div class="card-img" style="background:#fdf2f8"><i class="fas fa-book" style="color:#a21caf"></i></div>
         <div class="card-body"><h4>الموارد والمراجع</h4><p>كتب، مراجع، مستمعات، وأدوات دعم التعافي المتاحة بالعربية.</p><span class="card-link" style="color:#a21caf">استعرض الموارد <i class="fas fa-arrow-left"></i></span></div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -603,7 +835,12 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
     </table>
     <div style="margin-top:25px;text-align:center">
       <p style="color:var(--text-muted);font-size:14px;margin-bottom:15px"><i class="fas fa-info-circle" style="color:#7c3aed"></i> للحصول على العنوان الدقيق ورابط Zoom، تواصل معنا عبر الهاتف أو واتساب</p>
-      <a href="tel:+962797399453" class="btn btn-primary"><i class="fas fa-phone"></i> اتصل للاستفسار</a>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <a href="tel:+962797399453" class="btn btn-primary"><i class="fas fa-phone"></i> 🧔 رجال: +962 7 9739 9453</a>
+        <a href="tel:+962795345189" class="btn" style="background:#8B5CF6;color:#fff"><i class="fas fa-phone"></i> 👩 نساء: +962 7 9534 5189</a>
+        <a href="https://wa.me/962797399453" target="_blank" class="btn" style="background:#25d366;color:#fff"><i class="fab fa-whatsapp"></i> واتساب رجال</a>
+        <a href="https://wa.me/962795345189" target="_blank" class="btn" style="background:#8B5CF6;color:#fff"><i class="fab fa-whatsapp"></i> واتساب نساء</a>
+      </div>
     </div>
   </div>
 </section>
@@ -683,7 +920,7 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
         <div class="contact-item"><div class="icon"><i class="fas fa-phone"></i></div><div><h5>خط المساعدة للقادمين الجدد</h5><a href="tel:+962797399453">🧔 رجال: +962 7 9739 9453</a><br><a href="tel:+962795345189">👩 نساء: +962 7 9534 5189</a></div></div>
         <div class="contact-item"><div class="icon"><i class="fab fa-whatsapp"></i></div><div><h5>🧔 واتساب رجال</h5><a href="https://wa.me/962797399453" target="_blank">+962 7 9739 9453</a></div></div>
         <div class="contact-item"><div class="icon"><i class="fab fa-whatsapp"></i></div><div><h5>👩 واتساب نساء</h5><a href="https://wa.me/962795345189" target="_blank">+962 7 9534 5189</a></div></div>
-        <div class="contact-item"><div class="icon"><i class="fas fa-envelope"></i></div><div><h5>البريد الإلكتروني</h5><a href="mailto:Jordansa83@gmail.com">Jordansa83@gmail.com</a></div></div>
+        <div class="contact-item"><div class="icon"><i class="fas fa-envelope"></i></div><div><h5>البريد الإلكتروني</h5><a href="/cdn-cgi/l/email-protection#0842677a6c69667b69303b486f65696164266b6765"><span class="__cf_email__" data-cfemail="95dffae7f1f4fbe6f4ada6d5f2f8f4fcf9bbf6faf8">[email&#160;protected]</span></a></div></div>
         <div class="contact-item"><div class="icon"><i class="fas fa-map-marker-alt"></i></div><div><h5>الموقع</h5><p>عمان، الأردن — نخدم جميع المحافظات</p></div></div>
       </div>
     </div>
@@ -727,7 +964,7 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
           <div class="online-card"><h4><i class="fas fa-link"></i> الموقع الرسمي العالمي لـ SA</h4><p>الموقع الرسمي لزمالة مدمني الجنس المجهولون على مستوى العالم.</p><a href="https://www.sa.org" target="_blank">sa.org <i class="fas fa-external-link-alt"></i></a></div>
           <div class="online-card"><h4><i class="fas fa-link"></i> SA المملكة المتحدة</h4><p>موقع SA في المملكة المتحدة يقدم مراجع ومواد مفيدة.</p><a href="https://www.sauk.org" target="_blank">sauk.org <i class="fas fa-external-link-alt"></i></a></div>
           <div class="online-card"><h4><i class="fas fa-video"></i> اجتماعات Zoom العربية</h4><p>روابط اجتماعات SA الأسبوعية عبر Zoom للناطقين بالعربية.</p><a href="https://wa.me/96279739945" target="_blank">احصل على الرابط <i class="fas fa-arrow-left"></i></a></div>
-          <div class="online-card"><h4><i class="fas fa-pen-fancy"></i> دفتر الجرد الشخصي</h4><p>قوالب وأسئلة توجيهية للجرد الأخلاقي الشامل (الخطوة الرابعة).</p><a href="mailto:Jordansa83@gmail.com">تحميل القوالب <i class="fas fa-arrow-left"></i></a></div>
+          <div class="online-card"><h4><i class="fas fa-pen-fancy"></i> دفتر الجرد الشخصي</h4><p>قوالب وأسئلة توجيهية للجرد الأخلاقي الشامل (الخطوة الرابعة).</p><a href="/cdn-cgi/l/email-protection#c389acb1a7a2adb0a2fbf083a4aea2aaafeda0acae">تحميل القوالب <i class="fas fa-arrow-left"></i></a></div>
         </div>
       </div>
       <div class="resources-section">
@@ -736,16 +973,17 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
           <div class="sa-link-card"><div class="flag">🌍</div><h4>SA العالمية</h4><a href="https://www.sa.org" target="_blank">sa.org</a></div>
           <div class="sa-link-card"><div class="flag">🇬🇧</div><h4>SA المملكة المتحدة</h4><a href="https://www.sauk.org" target="_blank">sauk.org</a></div>
           <div class="sa-link-card"><div class="flag">🇺🇸</div><h4>SA أمريكا</h4><a href="https://www.sa.org" target="_blank">sa.org</a></div>
-          <div class="sa-link-card"><div class="flag">🇯🇴</div><h4>SA الأردن</h4><a href="mailto:Jordansa83@gmail.com">Jordansa83@gmail.com</a></div>
+          <div class="sa-link-card"><div class="flag">🇯🇴</div><h4>SA الأردن</h4><a href="/cdn-cgi/l/email-protection#d69cb9a4b2b7b8a5b7eee596b1bbb7bfbaf8b5b9bb"><span class="__cf_email__" data-cfemail="4c06233e282d223f2d747f0c2b212d2520622f2321">[email&#160;protected]</span></a></div>
         </div>
       </div>
       <div class="hotline-box">
         <h3><i class="fas fa-life-ring"></i> تحتاج مساعدة الآن؟</h3>
         <p>فريقنا متواجد للمساعدة والدعم. لا تتردد في التواصل معنا — أنت لست وحدك</p>
         <div class="hotline-btns">
-          <a href="tel:+962797399453" class="hotline-btn"><i class="fas fa-phone"></i> 🧔 +962 7 9739 9453</a>
-          <a href="tel:+962795345189" class="hotline-btn"><i class="fas fa-phone"></i> 👩 +962 7 9534 5189</a>
-          <a href="https://wa.me/962797399453" target="_blank" class="hotline-btn wa"><i class="fab fa-whatsapp"></i> واتساب</a>
+          <a href="tel:+962797399453" class="hotline-btn"><i class="fas fa-phone"></i> 🧔 رجال: +962 7 9739 9453</a>
+          <a href="tel:+962795345189" class="hotline-btn"><i class="fas fa-phone"></i> 👩 نساء: +962 7 9534 5189</a>
+          <a href="https://wa.me/962797399453" target="_blank" class="hotline-btn wa"><i class="fab fa-whatsapp"></i> 🧔 واتساب رجال</a>
+          <a href="https://wa.me/962795345189" target="_blank" class="hotline-btn" style="background:#8B5CF6;color:#fff"><i class="fab fa-whatsapp"></i> 👩 واتساب نساء</a>
         </div>
       </div>
     </div>
@@ -782,11 +1020,11 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
       <div class="footer-col">
         <h4>من نحن</h4>
         <ul>
-          <li><a onclick="showPage('home');scrollTo('about')">ما هي SA؟</a></li>
-          <li><a onclick="showPage('home');scrollTo('about');setTimeout(()=>switchTab('the-problem'),200)">الشهوة - المشكلة</a></li>
-          <li><a onclick="showPage('home');scrollTo('steps')">الخطوات الاثنتا عشرة</a></li>
-          <li><a onclick="openModal('traditionsModal')">التقاليد الاثنتا عشرة</a></li>
-          <li><a onclick="showPage('home');scrollTo('faq')">الأسئلة الشائعة</a></li>
+          <li><a href="javascript:void(0)" onclick="showPage('home');scrollToId('about')">ما هي SA؟</a></li>
+          <li><a href="javascript:void(0)" onclick="showPage('home');scrollToId('about');setTimeout(function(){switchTab('the-problem');},300)">الشهوة - المشكلة</a></li>
+          <li><a href="javascript:void(0)" onclick="showPage('home');scrollToId('steps')">الخطوات الاثنتا عشرة</a></li>
+          <li><a href="javascript:void(0)" onclick="showPage('home');scrollToId('steps');setTimeout(function(){var tog=document.getElementById('stepsTraditionsToggle');if(tog&&!tog.checked){tog.checked=true;toggleStepsTraditions();}},300)">التقاليد الاثنتا عشرة</a></li>
+          <li><a href="javascript:void(0)" onclick="showPage('home');scrollToId('faq')">الأسئلة الشائعة</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -803,8 +1041,9 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
         <ul>
           <li><a href="tel:+962797399453"><i class="fas fa-phone"></i> رجال: +962 7 9739 9453</a></li>
           <li><a href="tel:+962795345189"><i class="fas fa-phone"></i> نساء: +962 7 9534 5189</a></li>
-          <li><a href="https://wa.me/962797399453" target="_blank"><i class="fab fa-whatsapp"></i> واتساب</a></li>
-          <li><a href="mailto:Jordansa83@gmail.com"><i class="fas fa-envelope"></i> Jordansa83@gmail.com</a></li>
+          <li><a href="https://wa.me/962797399453" target="_blank"><i class="fab fa-whatsapp"></i> 🧔 واتساب رجال: +962 7 9739 9453</a></li>
+          <li><a href="https://wa.me/962795345189" target="_blank"><i class="fab fa-whatsapp"></i> 👩 واتساب نساء: +962 7 9534 5189</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#5812372a3c39362b39606b183f35393134763b3735"><i class="fas fa-envelope"></i> <span class="__cf_email__" data-cfemail="a6ecc9d4c2c7c8d5c79e95e6c1cbc7cfca88c5c9cb">[email&#160;protected]</span></a></li>
         </ul>
       </div>
     </div>
@@ -822,26 +1061,26 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
     <h3><i class="fas fa-clipboard-check" style="color:#7c3aed;margin-left:8px"></i>اختبار الإدمان الجنسي</h3>
     <div class="test-intro">أجب بصدق على الأسئلة التالية. هذا الاختبار سري تماماً ويساعدك في تحديد ما إذا كانت SA يمكن أن تساعدك.</div>
     <div class="test-progress-bar"><div class="test-progress-fill" id="progressFill" style="width:0%"></div></div>
-    <div class="test-question" onclick="toggleQ(1)"><span class="q-num">1</span><input type="checkbox" id="q1" onchange="updateProgress()"><label for="q1">هل سبق لك أن فكرت أنك بحاجة إلى مساعدة فيما يتعلق بأفكارك أو سلوكك الجنسي؟</label></div>
-    <div class="test-question" onclick="toggleQ(2)"><span class="q-num">2</span><input type="checkbox" id="q2" onchange="updateProgress()"><label for="q2">هل ستكون حالتك أفضل إذا لم تستمر في "الاستسلام"؟</label></div>
-    <div class="test-question" onclick="toggleQ(3)"><span class="q-num">3</span><input type="checkbox" id="q3" onchange="updateProgress()"><label for="q3">هل تسيطر عليك الرغبة الجنسية أو المحفزات؟</label></div>
-    <div class="test-question" onclick="toggleQ(4)"><span class="q-num">4</span><input type="checkbox" id="q4" onchange="updateProgress()"><label for="q4">هل سبق لك أن حاولت التوقف عن فعل ما شعرت أنه خطأ في سلوكك الجنسي أو الحد منه؟</label></div>
-    <div class="test-question" onclick="toggleQ(5)"><span class="q-num">5</span><input type="checkbox" id="q5" onchange="updateProgress()"><label for="q5">هل تلجأ إلى الجنس للهروب، أو لتخفيف القلق، أو لأنك لا تستطيع التأقلم؟</label></div>
-    <div class="test-question" onclick="toggleQ(6)"><span class="q-num">6</span><input type="checkbox" id="q6" onchange="updateProgress()"><label for="q6">هل تشعر بالذنب أو الندم أو الاكتئاب بعد ذلك؟</label></div>
-    <div class="test-question" onclick="toggleQ(7)"><span class="q-num">7</span><input type="checkbox" id="q7" onchange="updateProgress()"><label for="q7">هل أصبح سعيك وراء الجنس أكثر إلحاحاً؟</label></div>
-    <div class="test-question" onclick="toggleQ(8)"><span class="q-num">8</span><input type="checkbox" id="q8" onchange="updateProgress()"><label for="q8">هل يؤثر ذلك على علاقتك بزوجتك؟</label></div>
-    <div class="test-question" onclick="toggleQ(9)"><span class="q-num">9</span><input type="checkbox" id="q9" onchange="updateProgress()"><label for="q9">هل تضطر إلى اللجوء إلى الصور أو الذكريات أثناء ممارسة الجنس؟</label></div>
-    <div class="test-question" onclick="toggleQ(10)"><span class="q-num">10</span><input type="checkbox" id="q10" onchange="updateProgress()"><label for="q10">هل تنشأ رغبة لا تقاوم عندما يبادر الطرف الآخر بالتقرب أو عندما يُعرض عليه ممارسة الجنس؟</label></div>
-    <div class="test-question" onclick="toggleQ(11)"><span class="q-num">11</span><input type="checkbox" id="q11" onchange="updateProgress()"><label for="q11">هل تنتقل باستمرار من "علاقة" أو حبيب إلى آخر؟</label></div>
-    <div class="test-question" onclick="toggleQ(12)"><span class="q-num">12</span><input type="checkbox" id="q12" onchange="updateProgress()"><label for="q12">هل تشعر أن "العلاقة الصحيحة" ستساعدك على التوقف عن الشهوة، أو الاستمناء، أو الانحلال الأخلاقي؟</label></div>
-    <div class="test-question" onclick="toggleQ(13)"><span class="q-num">13</span><input type="checkbox" id="q13" onchange="updateProgress()"><label for="q13">هل لديك حاجة مدمرة - حاجة جنسية أو عاطفية ملحة لشخص ما؟</label></div>
-    <div class="test-question" onclick="toggleQ(14)"><span class="q-num">14</span><input type="checkbox" id="q14" onchange="updateProgress()"><label for="q14">هل يجعلك السعي وراء الجنس مهملاً لنفسك أو لرفاهية عائلتك أو الآخرين؟</label></div>
-    <div class="test-question" onclick="toggleQ(15)"><span class="q-num">15</span><input type="checkbox" id="q15" onchange="updateProgress()"><label for="q15">هل انخفضت كفاءتك أو تركيزك مع ازدياد إدمانك للجنس؟</label></div>
-    <div class="test-question" onclick="toggleQ(16)"><span class="q-num">16</span><input type="checkbox" id="q16" onchange="updateProgress()"><label for="q16">هل تخسر وقتاً من العمل بسبب ذلك؟</label></div>
-    <div class="test-question" onclick="toggleQ(17)"><span class="q-num">17</span><input type="checkbox" id="q17" onchange="updateProgress()"><label for="q17">هل تلجأ إلى بيئة أدنى عند ممارسة الجنس؟</label></div>
-    <div class="test-question" onclick="toggleQ(18)"><span class="q-num">18</span><input type="checkbox" id="q18" onchange="updateProgress()"><label for="q18">هل ترغب في الابتعاد عن شريكك الجنسي في أسرع وقت ممكن بعد انتهاء العلاقة؟</label></div>
-    <div class="test-question" onclick="toggleQ(19)"><span class="q-num">19</span><input type="checkbox" id="q19" onchange="updateProgress()"><label for="q19">على الرغم من أن زوجك متوافق معك جنسياً، هل ما زلت تمارس العادة السرية أو تمارس الجنس مع آخرين؟</label></div>
-    <div class="test-question" onclick="toggleQ(20)"><span class="q-num">20</span><input type="checkbox" id="q20" onchange="updateProgress()"><label for="q20">هل سبق أن تم القبض عليك بتهمة تتعلق بجريمة جنسية؟</label></div>
+    <div class="test-question"><span class="q-num">1</span><input type="checkbox" id="q1" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q1">هل سبق لك أن فكرت أنك بحاجة إلى مساعدة فيما يتعلق بأفكارك أو سلوكك الجنسي؟</label></div>
+    <div class="test-question"><span class="q-num">2</span><input type="checkbox" id="q2" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q2">هل ستكون حالتك أفضل إذا لم تستمر في "الاستسلام"؟</label></div>
+    <div class="test-question"><span class="q-num">3</span><input type="checkbox" id="q3" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q3">هل تسيطر عليك الرغبة الجنسية أو المحفزات؟</label></div>
+    <div class="test-question"><span class="q-num">4</span><input type="checkbox" id="q4" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q4">هل سبق لك أن حاولت التوقف عن فعل ما شعرت أنه خطأ في سلوكك الجنسي أو الحد منه؟</label></div>
+    <div class="test-question"><span class="q-num">5</span><input type="checkbox" id="q5" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q5">هل تلجأ إلى الجنس للهروب، أو لتخفيف القلق، أو لأنك لا تستطيع التأقلم؟</label></div>
+    <div class="test-question"><span class="q-num">6</span><input type="checkbox" id="q6" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q6">هل تشعر بالذنب أو الندم أو الاكتئاب بعد ذلك؟</label></div>
+    <div class="test-question"><span class="q-num">7</span><input type="checkbox" id="q7" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q7">هل أصبح سعيك وراء الجنس أكثر إلحاحاً؟</label></div>
+    <div class="test-question"><span class="q-num">8</span><input type="checkbox" id="q8" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q8">هل يؤثر ذلك على علاقتك بزوجتك؟</label></div>
+    <div class="test-question"><span class="q-num">9</span><input type="checkbox" id="q9" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q9">هل تضطر إلى اللجوء إلى الصور أو الذكريات أثناء ممارسة الجنس؟</label></div>
+    <div class="test-question"><span class="q-num">10</span><input type="checkbox" id="q10" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q10">هل تنشأ رغبة لا تقاوم عندما يبادر الطرف الآخر بالتقرب أو عندما يُعرض عليه ممارسة الجنس؟</label></div>
+    <div class="test-question"><span class="q-num">11</span><input type="checkbox" id="q11" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q11">هل تنتقل باستمرار من "علاقة" أو حبيب إلى آخر؟</label></div>
+    <div class="test-question"><span class="q-num">12</span><input type="checkbox" id="q12" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q12">هل تشعر أن "العلاقة الصحيحة" ستساعدك على التوقف عن الشهوة، أو الاستمناء، أو الانحلال الأخلاقي؟</label></div>
+    <div class="test-question"><span class="q-num">13</span><input type="checkbox" id="q13" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q13">هل لديك حاجة مدمرة - حاجة جنسية أو عاطفية ملحة لشخص ما؟</label></div>
+    <div class="test-question"><span class="q-num">14</span><input type="checkbox" id="q14" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q14">هل يجعلك السعي وراء الجنس مهملاً لنفسك أو لرفاهية عائلتك أو الآخرين؟</label></div>
+    <div class="test-question"><span class="q-num">15</span><input type="checkbox" id="q15" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q15">هل انخفضت كفاءتك أو تركيزك مع ازدياد إدمانك للجنس؟</label></div>
+    <div class="test-question"><span class="q-num">16</span><input type="checkbox" id="q16" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q16">هل تخسر وقتاً من العمل بسبب ذلك؟</label></div>
+    <div class="test-question"><span class="q-num">17</span><input type="checkbox" id="q17" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q17">هل تلجأ إلى بيئة أدنى عند ممارسة الجنس؟</label></div>
+    <div class="test-question"><span class="q-num">18</span><input type="checkbox" id="q18" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q18">هل ترغب في الابتعاد عن شريكك الجنسي في أسرع وقت ممكن بعد انتهاء العلاقة؟</label></div>
+    <div class="test-question"><span class="q-num">19</span><input type="checkbox" id="q19" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q19">على الرغم من أن زوجك متوافق معك جنسياً، هل ما زلت تمارس العادة السرية أو تمارس الجنس مع آخرين؟</label></div>
+    <div class="test-question"><span class="q-num">20</span><input type="checkbox" id="q20" onchange="this.closest('.test-question').classList.toggle('checked',this.checked);updateProgress();"><label for="q20">هل سبق أن تم القبض عليك بتهمة تتعلق بجريمة جنسية؟</label></div>
     <button class="btn btn-primary" onclick="showTestResult()" style="width:100%;margin-top:24px;font-size:16px"><i class="fas fa-chart-bar"></i> اعرف النتيجة</button>
     <div id="testResult" style="display:none">
       <div class="test-score" id="testScore"></div>
@@ -869,152 +1108,15 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
   </div></div>
 </div>
 <div class="modal" id="eventsModal">
-  <div class="modal-box"><button class="modal-close" onclick="closeModal('eventsModal')">×</button><h3>الفعاليات والمؤتمرات</h3><p class="modal-p">تواصل معنا للاطلاع على الفعاليات القادمة</p><a href="https://wa.me/962797399453" target="_blank" class="btn btn-primary" style="justify-content:center;width:100%"><i class="fab fa-whatsapp"></i> استفسر عبر واتساب</a></div>
+  <div class="modal-box"><button class="modal-close" onclick="closeModal('eventsModal')">×</button><h3>الفعاليات والمؤتمرات</h3><p class="modal-p">تواصل معنا للاطلاع على الفعاليات القادمة</p>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <a href="https://wa.me/962797399453" target="_blank" class="btn" style="background:#25d366;color:#fff;justify-content:center"><i class="fab fa-whatsapp"></i> 🧔 واتساب رجال: +962 7 9739 9453</a>
+    <a href="https://wa.me/962795345189" target="_blank" class="btn" style="background:#8B5CF6;color:#fff;justify-content:center"><i class="fab fa-whatsapp"></i> 👩 واتساب نساء: +962 7 9534 5189</a>
+  </div></div>
 </div>
 <div class="modal" id="downloadModal">
   <div class="modal-box"><button class="modal-close" onclick="closeModal('downloadModal')">×</button><h3>الحصول على المراجع</h3><p class="modal-p">للحصول على الكتب والمراجع، تواصل معنا</p>
   <div style="display:flex;flex-direction:column;gap:12px">
-    <a href="mailto:Jordansa83@gmail.com" class="btn btn-primary" style="justify-content:center"><i class="fas fa-envelope"></i> Jordansa83@gmail.com</a>
-    <a href="https://wa.me/962797399453" target="_blank" class="btn" style="background:#25d366;color:#fff;justify-content:center"><i class="fab fa-whatsapp"></i> تواصل عبر واتساب</a>
-  </div></div>
-</div>
-
-<script>
-// PAGE SYSTEM
-function showPage(name){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  document.querySelectorAll('.nav-inner a').forEach(a=>a.classList.remove('active-nav'));
-  const el=document.getElementById('nav-'+name);if(el)el.classList.add('active-nav');
-  window.scrollTo(0,0);
-}
-function scrollTo(id){setTimeout(()=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},120)}
-function toggleNav(){const n=document.getElementById('mobileNav');n.style.display=n.style.display==='block'?'none':'block'}
-
-// TABS
-function openTab(e,id){
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  e.currentTarget.classList.add('active');
-}
-function switchTab(id){
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.tab-btn').forEach(b=>{
-    if((id==='who-we-are'&&b.textContent.trim()==='من نحن')||(id==='the-problem'&&b.textContent.trim()==='المشكلة')||(id==='the-solution'&&b.textContent.trim()==='الحل'))b.classList.add('active');
-  });
-}
-
-// MODALS
-function openModal(id){document.getElementById(id).classList.add('open')}
-function closeModal(id){document.getElementById(id).classList.remove('open')}
-window.addEventListener('click',e=>{if(e.target.classList.contains('modal'))e.target.classList.remove('open')});
-
-// FAQ
-function toggleFaq(n){
-  const c=document.getElementById('fqc'+n),i=document.getElementById('fqi'+n);
-  if(c.style.display==='block'){c.style.display='none';i.className='fas fa-plus';i.style.color='#7c3aed'}
-  else{c.style.display='block';i.className='fas fa-minus';i.style.color='#7c3aed'}
-}
-
-// TEST
-function toggleQ(n){
-  const cb=document.getElementById('q'+n);cb.checked=!cb.checked;
-  cb.closest('.test-question').classList.toggle('checked',cb.checked);
-  updateProgress();
-}
-function updateProgress(){
-  let checked=0;
-  for(let i=1;i<=20;i++){if(document.getElementById('q'+i).checked)checked++}
-  document.getElementById('progressFill').style.width=(checked/20*100)+'%';
-}
-function showTestResult(){
-  let score=0;
-  for(let i=1;i<=20;i++){if(document.getElementById('q'+i).checked)score++}
-  const res=document.getElementById('testResult');
-  res.style.display='block';
-  document.getElementById('testScore').textContent=score+'/20';
-  document.getElementById('testScoreLabel').textContent='إجاباتك بنعم';
-  const box=document.getElementById('testResultBox');
-  const title=document.getElementById('testResultTitle');
-  const text=document.getElementById('testResultText');
-  const action=document.getElementById('testResultAction');
-  box.className='test-result';
-  if(score===0){box.classList.add('none');title.textContent='✅ لا توجد علامات واضحة';text.textContent='لم تظهر إجاباتك علامات واضحة للإدمان الجنسي. إذا كانت لديك مخاوف أو أسئلة، لا تتردد في التواصل معنا.';action.innerHTML='';}
-  else if(score<=5){box.classList.add('low');title.textContent='⚠️ بعض العلامات موجودة';text.textContent='أجاباتك تشير لبعض علامات الإدمان الجنسي. يُنصح بحضور اجتماع SA لمعرفة المزيد — الاجتماعات مجانية وسرية.';action.innerHTML='<a href="tel:+962797399453" style="display:inline-flex;align-items:center;gap:6px;background:#7c3aed;color:#fff;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none;margin-top:10px"><i class="fas fa-phone"></i> تواصل معنا</a>';}
-  else if(score<=12){box.classList.add('mid');title.textContent='🔴 علامات الإدمان موجودة';text.textContent='أجاباتك تشير بوضوح لعلامات إدمان جنسي. نوصيك بشدة بالتواصل معنا أو حضور اجتماع SA في أقرب وقت ممكن. التعافي ممكن.';action.innerHTML='<a href="tel:+962797399453" style="display:inline-flex;align-items:center;gap:6px;background:#7c3aed;color:#fff;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none;margin-top:10px"><i class="fas fa-phone"></i> اتصل الآن: +962 7 9739 9453</a>';}
-  else{box.classList.add('high');title.textContent='🆘 علامات قوية جداً للإدمان الجنسي';text.textContent='أجاباتك تشير لإدمان جنسي شديد. لكن لا تيأس — التعافي ممكن وآلاف الأشخاص تعافوا من خلال SA. تواصل معنا اليوم ولا تنتظر.';action.innerHTML='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><a href="tel:+962797399453" style="display:inline-flex;align-items:center;gap:6px;background:#7c3aed;color:#fff;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none"><i class="fas fa-phone"></i> رجال: +962 7 9739 9453</a><a href="tel:+962795345189" style="display:inline-flex;align-items:center;gap:6px;background:#be185d;color:#fff;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none"><i class="fas fa-phone"></i> نساء: +962 7 9534 5189</a></div>';}
-  res.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-
-// TOGGLE STEPS / TRADITIONS
-function toggleStepsTraditions(){
-  const tog=document.getElementById('stepsTraditionsToggle');
-  const stepsEl=document.getElementById('stepsContent');
-  const tradEl=document.getElementById('traditionsContent');
-  const labelSteps=document.getElementById('label-steps');
-  const labelTrad=document.getElementById('label-traditions');
-  if(tog.checked){stepsEl.style.display='none';tradEl.style.display='block';labelSteps.classList.remove('active-label');labelTrad.classList.add('active-label');}
-  else{stepsEl.style.display='block';tradEl.style.display='none';labelSteps.classList.add('active-label');labelTrad.classList.remove('active-label');}
-}
-
-// DARK MODE
-function initTheme(){
-  const saved=localStorage.getItem('theme')||'light';
-  document.documentElement.setAttribute('data-theme',saved);
-  updateThemeIcon(saved);
-}
-function toggleTheme(){
-  const current=document.documentElement.getAttribute('data-theme')||'light';
-  const next=current==='light'?'dark':'light';
-  document.documentElement.setAttribute('data-theme',next);
-  localStorage.setItem('theme',next);
-  updateThemeIcon(next);
-}
-function updateThemeIcon(theme){
-  const btn=document.getElementById('themeToggle');
-  if(btn)btn.innerHTML='<i class="fas fa-'+(theme==='dark'?'sun':'moon')+'"></i>';
-}
-document.getElementById('themeToggle')?.addEventListener('click',toggleTheme);
-initTheme();
-
-// SOBRIETY COUNTER
-function calculateSobriety(){
-  const input=document.getElementById('soberDate').value;
-  if(!input){['count-years','count-months','count-days','count-hours'].forEach(id=>{document.getElementById(id).textContent='0'});return}
-  const startDate=new Date(input);const today=new Date();
-  let years=today.getFullYear()-startDate.getFullYear();
-  let months=today.getMonth()-startDate.getMonth();
-  let days=today.getDate()-startDate.getDate();
-  if(days<0){months--;days+=new Date(today.getFullYear(),today.getMonth(),0).getDate()}
-  if(months<0){years--;months+=12}
-  const totalDays=Math.floor((today-startDate)/(1000*60*60*24));
-  document.getElementById('count-years').textContent=years;
-  document.getElementById('count-months').textContent=months;
-  document.getElementById('count-days').textContent=days;
-  document.getElementById('count-hours').textContent=(totalDays*24).toLocaleString('ar-EG');
-  localStorage.setItem('soberDate',input);
-}
-window.addEventListener('load',()=>{
-  const saved=localStorage.getItem('soberDate');
-  if(saved){document.getElementById('soberDate').value=saved;calculateSobriety()}
-});
-
-// SEARCH
-function filterResources(){
-  const query=document.getElementById('resourceSearch').value.toLowerCase();
-  document.querySelectorAll('.res-card,.online-card,.sa-link-card').forEach(card=>{
-    card.style.display=card.textContent.toLowerCase().includes(query)?'':'none';
-  });
-}
-
-// SHARE
-function shareWA(){const url=window.location.href;window.open('https://wa.me/?text='+encodeURIComponent('تحقق من SA الأردن - زمالة مدمني الجنس المجهولون '+url))}
-function shareTG(){const url=window.location.href;window.open('https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent('SA الأردن'))}
-function copyLink(){navigator.clipboard.writeText(window.location.href);alert('تم نسخ الرابط!')}
-function handleForm(e){e.preventDefault();alert('شكراً! سنتواصل معك قريباً.');e.target.reset()}
-</script>
-</body>
-</html>
+    <a href="https://wa.me/962797399453" target="_blank" class="btn" style="background:#25d366;color:#fff;justify-content:center"><i class="fab fa-whatsapp"></i> 🧔 واتساب رجال: +962 7 9739 9453</a>
+    <a href="https://wa.me/962795345189" target="_blank" class="btn" style="background:#8B5CF6;color:#fff;justify-content:center"><i class="fab fa-whatsapp"></i> 👩 واتساب نساء: +962 7 9534 5189</a>
+    <a href="/cdn-cgi/l/email-protection#72381d0016131c01134a4132151f131b1e5c111d1f" class="btn btn-primary" style="justify-content:center"><i class="fas fa-envelope"></i> <span class="__cf_ema
