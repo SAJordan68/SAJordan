@@ -13,6 +13,11 @@
 <meta property="og:title" content="زمالة مدمني الجنس المجهولين الأردن">
 <meta property="og:description" content="برنامج التعافي من إدمان الجنس عبر خطوات التعافي الاثنتي عشرة ودعم المجموعات.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://sajordan68.github.io/SAJordan/og-image.png">
+<meta property="og:image:alt" content="SA الأردن - زمالة مدمني الجنس المجهولون">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SA الأردن | زمالة مدمني الجنس المجهولين">
+<meta name="twitter:description" content="زمالة مدمني الجنس المجهولون في الأردن. التعافي من إدمان الجنس والشهوة القهرية عبر برنامج الخطوات الاثنتي عشرة.">
 <meta property="og:url" content="https://sajordan68.github.io/SAJordan/">
 <script>
 // كل الدوال هنا في الـ head عشان تشتغل فوراً على الموبايل
@@ -692,13 +697,13 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
 <div class="mobile-nav" id="mobileNav" onclick="if(event.target===this)toggleNav()">
   <div class="mobile-nav-inner">
     <span class="mobile-nav-close" onclick="toggleNav()"><i class="fas fa-times"></i> إغلاق</span>
-    <a href="javascript:void(0)" onclick="showPage('home');toggleNav()">🏠 الرئيسية</a>
-    <a href="javascript:void(0)" onclick="showPage('home');scrollToId('about');toggleNav()">👥 من نحن</a>
-    <a href="javascript:void(0)" onclick="showPage('home');scrollToId('meetings');toggleNav()">📅 الاجتماعات</a>
-    <a href="javascript:void(0)" onclick="showPage('home');scrollToId('sober');toggleNav()">💪 البقاء رصين</a>
-    <a href="javascript:void(0)" onclick="showPage('resources');toggleNav()">📚 الموارد</a>
-    <a href="javascript:void(0)" onclick="showPage('home');scrollToId('contact');toggleNav()">📞 اتصل بنا</a>
-    <a href="javascript:void(0)" onclick="openModal('testModal');toggleNav()" style="color:#a78bfa;font-weight:800"><i class="fas fa-clipboard-check"></i> اختبر نفسك</a>
+    <a href="index.html" onclick="showPage('home');toggleNav();return false;">🏠 الرئيسية</a>
+    <a href="#about" onclick="showPage('home');scrollToId('about');toggleNav();return false;">👥 من نحن</a>
+    <a href="#meetings" onclick="showPage('home');scrollToId('meetings');toggleNav();return false;">📅 الاجتماعات</a>
+    <a href="#sober" onclick="showPage('home');scrollToId('sober');toggleNav();return false;">💪 البقاء رصين</a>
+    <a href="resources.html" onclick="showPage('resources');toggleNav();return false;">📚 الموارد</a>
+    <a href="#contact" onclick="showPage('home');scrollToId('contact');toggleNav();return false;">📞 اتصل بنا</a>
+    <a href="#testModal" onclick="openModal('testModal');toggleNav();return false;" style="color:#a78bfa;font-weight:800"><i class="fas fa-clipboard-check"></i> اختبر نفسك</a>
   </div>
 </div>
 
@@ -947,10 +952,10 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
     </div>
     <div>
       <h3>أرسل لنا رسالة</h3>
-      <form onsubmit="handleForm(event)">
-        <input type="text" placeholder="الاسم (أو اسم مستعار)" required>
-        <input type="email" placeholder="البريد الإلكتروني" required>
-        <input type="tel" placeholder="رقم الهاتف (اختياري)">
+      <form id="contactForm" onsubmit="handleForm(event)" novalidate>
+        <input type="text" id="formName" name="name" autocomplete="name" placeholder="الاسم (أو اسم مستعار)" required>
+        <input type="email" id="formEmail" name="email" autocomplete="email" placeholder="البريد الإلكتروني" required>
+        <input type="tel" id="formPhone" name="phone" autocomplete="tel" placeholder="رقم الهاتف (اختياري)">
         <textarea placeholder="رسالتك..."></textarea>
         <button type="submit"><i class="fas fa-paper-plane"></i> إرسال الرسالة</button>
         <p style="text-align:center;font-size:12px;color:var(--text-muted)"><i class="fas fa-lock"></i> جميع الرسائل سرية تماماً</p>
@@ -984,7 +989,7 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
         <div class="online-resources">
           <div class="online-card"><h4><i class="fas fa-link"></i> الموقع الرسمي العالمي لـ SA</h4><p>الموقع الرسمي لزمالة مدمني الجنس المجهولون على مستوى العالم.</p><a href="https://www.sa.org" target="_blank">sa.org <i class="fas fa-external-link-alt"></i></a></div>
           <div class="online-card"><h4><i class="fas fa-link"></i> SA المملكة المتحدة</h4><p>موقع SA في المملكة المتحدة يقدم مراجع ومواد مفيدة.</p><a href="https://www.sauk.org" target="_blank">sauk.org <i class="fas fa-external-link-alt"></i></a></div>
-          <div class="online-card"><h4><i class="fas fa-video"></i> اجتماعات Zoom العربية</h4><p>روابط اجتماعات SA الأسبوعية عبر Zoom للناطقين بالعربية.</p><a href="https://wa.me/96279739945" target="_blank">احصل على الرابط <i class="fas fa-arrow-left"></i></a></div>
+          <div class="online-card"><h4><i class="fas fa-video"></i> اجتماعات Zoom العربية</h4><p>روابط اجتماعات SA الأسبوعية عبر Zoom للناطقين بالعربية.</p><a href="https://wa.me/962797399453" target="_blank">احصل على الرابط <i class="fas fa-arrow-left"></i></a></div>
           <div class="online-card"><h4><i class="fas fa-pen-fancy"></i> دفتر الجرد الشخصي</h4><p>قوالب وأسئلة توجيهية للجرد الأخلاقي الشامل (الخطوة الرابعة).</p><a href="/cdn-cgi/l/email-protection#c389acb1a7a2adb0a2fbf083a4aea2aaafeda0acae">تحميل القوالب <i class="fas fa-arrow-left"></i></a></div>
         </div>
       </div>
@@ -1026,26 +1031,26 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
         <h4>SA الأردن</h4>
         <p>زمالة مدمني الجنس المجهولون في الأردن. نقدم الدعم والأمل لكل من يعاني من إدمان الجنس والشهوة القهرية في الأردن والمنطقة العربية.</p>
         <div class="share-btns">
-          <a href="#" onclick="shareWA()" class="share-btn wa"><i class="fab fa-whatsapp"></i></a>
-          <a href="#" onclick="shareTG()" class="share-btn tg"><i class="fab fa-telegram-plane"></i></a>
-          <a href="#" onclick="copyLink()" class="share-btn copy"><i class="fas fa-link"></i></a>
+          <a href="#" onclick="shareWA();return false;" aria-label="مشاركة عبر واتساب" class="share-btn wa"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" onclick="shareTG();return false;" aria-label="مشاركة عبر تيليغرام" class="share-btn tg"><i class="fab fa-telegram-plane"></i></a>
+          <a href="#" onclick="copyLink();return false;" aria-label="نسخ الرابط" class="share-btn copy"><i class="fas fa-link"></i></a>
         </div>
         <div class="social-links">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.facebook.com/groups/SAJordan" aria-label="فيسبوك SA الأردن" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/sajordan68" aria-label="إنستغرام SA الأردن" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com/SAJordan68" aria-label="تويتر SA الأردن" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.youtube.com/@SAJordan" aria-label="يوتيوب SA الأردن" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
           <a href="https://wa.me/962797399453" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
       <div class="footer-col">
         <h4>من نحن</h4>
         <ul>
-          <li><a href="javascript:void(0)" onclick="showPage('home');scrollToId('about')">ما هي SA؟</a></li>
-          <li><a href="javascript:void(0)" onclick="showPage('home');scrollToId('about');setTimeout(function(){switchTab('the-problem');},300)">الشهوة - المشكلة</a></li>
-          <li><a href="javascript:void(0)" onclick="showPage('home');scrollToId('steps')">الخطوات الاثنتا عشرة</a></li>
-          <li><a href="javascript:void(0)" onclick="showPage('home');scrollToId('steps');setTimeout(function(){var tog=document.getElementById('stepsTraditionsToggle');if(tog&&!tog.checked){tog.checked=true;toggleStepsTraditions();}},300)">التقاليد الاثنتا عشرة</a></li>
-          <li><a href="javascript:void(0)" onclick="showPage('home');scrollToId('faq')">الأسئلة الشائعة</a></li>
+          <li><a href="#about" onclick="showPage('home');scrollToId('about');return false;">ما هي SA؟</a></li>
+          <li><a href="#about" onclick="showPage('home');scrollToId('about');setTimeout(function(){switchTab('the-problem');},300);return false;">الشهوة - المشكلة</a></li>
+          <li><a href="#steps" onclick="showPage('home');scrollToId('steps');return false;">الخطوات الاثنتا عشرة</a></li>
+          <li><a href="#steps" onclick="showPage('home');scrollToId('steps');setTimeout(function(){var tog=document.getElementById('stepsTraditionsToggle');if(tog&&!tog.checked){tog.checked=true;toggleStepsTraditions();}},300);return false;">التقاليد الاثنتا عشرة</a></li>
+          <li><a href="#faq" onclick="showPage('home');scrollToId('faq');return false;">الأسئلة الشائعة</a></li>
         </ul>
       </div>
       <div class="footer-col">
