@@ -628,6 +628,47 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
   .section-title h3{font-size:36px}
   .cards-grid{grid-template-columns:repeat(4,1fr)}
 }
+
+/* MOBILE SUBMENU */
+.mobile-submenu-toggle{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+  color:#d1d5db;
+  text-decoration:none;
+  padding:14px 20px;
+  border-bottom:1px solid #2d2d44;
+  font-weight:600;
+  cursor:pointer;
+  font-size:15px;
+  min-height:48px;
+  background:none;
+  border-left:none;
+  border-right:none;
+  border-top:none;
+  font-family:'Cairo',sans-serif;
+  text-align:right;
+}
+.mobile-submenu-toggle:hover,.mobile-submenu-toggle:active{background:#7c3aed;color:#fff}
+.mobile-submenu-toggle .arrow{font-size:11px;transition:transform .3s;flex-shrink:0;margin-right:auto;margin-left:0}
+.mobile-submenu-toggle.open .arrow{transform:rotate(180deg)}
+.mobile-submenu-toggle.open{background:#2d2d44;color:#a78bfa}
+.mobile-submenu{display:none;background:#111127}
+.mobile-submenu.open{display:block}
+.mobile-submenu a{
+  display:block;
+  color:#a78bfa;
+  text-decoration:none;
+  padding:12px 20px 12px 36px;
+  border-bottom:1px solid #2d2d44;
+  font-weight:600;
+  cursor:pointer;
+  font-size:14px;
+  min-height:44px;
+  line-height:20px;
+}
+.mobile-submenu a:hover,.mobile-submenu a:active{background:#7c3aed;color:#fff}
 </style>
 
 <body>
@@ -698,7 +739,18 @@ footer{background:var(--footer-bg);color:#9ca3af;padding:50px 20px 20px}
   <div class="mobile-nav-inner">
     <span class="mobile-nav-close" onclick="toggleNav()"><i class="fas fa-times"></i> إغلاق</span>
     <a href="index.html" onclick="showPage('home');toggleNav();return false;">🏠 الرئيسية</a>
-    <a href="#about" onclick="showPage('home');scrollToId('about');toggleNav();return false;">👥 من نحن</a>
+    <button class="mobile-submenu-toggle" onclick="var s=this.nextElementSibling,open=s.classList.contains('open');s.classList.toggle('open');this.classList.toggle('open');">
+      👥 من نحن <i class="fas fa-chevron-down arrow"></i>
+    </button>
+    <div class="mobile-submenu">
+      <a href="#about" onclick="showPage('home');scrollToId('about');toggleNav();return false;">ما هي SA؟</a>
+      <a href="#" onclick="openModal('sobrietyModal');toggleNav();return false;">تعريف الرصانة</a>
+      <a href="#about" onclick="showPage('home');scrollToId('about');setTimeout(function(){switchTab('the-problem');},300);toggleNav();return false;">الشهوة - المشكلة</a>
+      <a href="#about" onclick="showPage('home');scrollToId('about');setTimeout(function(){switchTab('the-solution');},300);toggleNav();return false;">الشهوة - الحل</a>
+      <a href="#steps" onclick="showPage('home');scrollToId('steps');toggleNav();return false;">الخطوات الاثنتا عشرة</a>
+      <a href="#steps" onclick="showPage('home');scrollToId('steps');setTimeout(function(){var tog=document.getElementById('stepsTraditionsToggle');if(tog&&!tog.checked){tog.checked=true;toggleStepsTraditions();}},300);toggleNav();return false;">التقاليد الاثنتا عشرة</a>
+      <a href="#faq" onclick="showPage('home');scrollToId('faq');toggleNav();return false;">الأسئلة الشائعة</a>
+    </div>
     <a href="#meetings" onclick="showPage('home');scrollToId('meetings');toggleNav();return false;">📅 الاجتماعات</a>
     <a href="#sober" onclick="showPage('home');scrollToId('sober');toggleNav();return false;">💪 البقاء رصين</a>
     <a href="resources.html" onclick="showPage('resources');toggleNav();return false;">📚 الموارد</a>
